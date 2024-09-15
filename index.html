@@ -3,12 +3,34 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+
 		<title>Quotes</title>
 		<link rel="stylesheet" href="style.css" />
-		<script src="./script.js" defer></script>
+		<script src="./script.js " defer></script>
+		<script src="./today_random.js" defer></script>
 	</head>
 	<body>
 		<h1></h1>
+		<button id="quote-btn">Get Quote</button>
+		<div id="today">
+			<div id="today-box">
+				<div id="text">Today’s new quotes </div>
+				<div id="time">
+					<span class="unit"  id="h"></span>
+					<span class="dot" id="dot1"></span>
+					<span class="unit" id="m"></span>
+					<span class="dot" id="dot2"></span>
+					<span class="unit" id="s"></span>
+
+				</div>
+			</div>
+			<div id="today-quote">
+			<blockquote class="blockquote td"></blockquote>
+			<span class="author ">
+			</span>
+			</div>
+		</div> 
 		<section class="sec"></section>
         <div id="loader" >Loading...</div>
 	</body>
