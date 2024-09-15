@@ -53,7 +53,7 @@ setInterval(async () => {
 	hEle.textContent = hours <= 9 ? "0" + hours : hours;
 
 	// Check if it's the end of the day
-	if (seconds === 0 && minutes === 0 && hours === 0) {
+	if (seconds === 0 && minutes === 0 && hours === 15) {
 		// Fetch new data and update paragraph content
 		let data = await random();
 		localStorage.setItem(
