@@ -1,4 +1,4 @@
-let count = 0;
+
 let page = localStorage.setItem("pages", "1");
 let pa = localStorage.getItem("pages");
 let pages = Number(pa);
@@ -44,8 +44,8 @@ async function numb(pages, limits) {
 			let block = document.createElement("blockquote");
 			let span = document.createElement("span");
 			div.setAttribute("class", "box");
-			span.setAttribute("class", "author");
-			block.setAttribute("class", "blockquote");
+			span.setAttribute("class", "author child" );
+			block.setAttribute("class", "blockquote child");
 			div.append(block, span);
 			block.innerText = `${"\u{201C}"}  ${
 				Data.results[i].content
@@ -68,18 +68,14 @@ async function numb(pages, limits) {
 		callErr();
 	}
 }
-
-async function dataLive( page, limit) {
+var count;
+async function dataLive(page, limit) {
 	// console.log(page,limit);
-	let response
-	try {
-		response = await fetch(
-			`https://api.quotable.io/quotes?page=${page}&limit=${limit}`
+	
+	let response = await fetch(
+			`https://api.quotable.io/quotes?page=${page }&limit=${limit}`
 		)
-	}
-	catch (error) {
-		console.log("fetch error", error);
-	}
+	
 
 	try {
 		if (response.ok) {
@@ -104,7 +100,12 @@ const callback = (entries) => {
 	// console.log(observe);
 	const [entry] = entries;
 
-	if (entry.isIntersecting && Number(localStorage.getItem("pages")) > 1) {
+	count = Number(localStorage.getItem("pages")) || count++
+	if (Number(localStorage.getItem("pages")) === 0) {
+		localStorage.setItem("pages",count)
+	}
+	if (entry.isIntersecting && (Number(localStorage.getItem("pages")) > 1) ) {
+		
 		loadMoreItems(pages);
 	}
 };
