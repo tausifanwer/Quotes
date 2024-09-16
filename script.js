@@ -39,7 +39,7 @@ async function numb(pages) {
 	try {
 		if (
 			navigator.userAgentData.platform === "Android" ||
-			navigator.userAgentData.platform === ("" || undefined || null)
+			navigator.userAgentData.platform === ("")
 		) {
 			throw new Error("Please try again or open in PC");
 		}
