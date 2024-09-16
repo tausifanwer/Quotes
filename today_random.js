@@ -10,6 +10,25 @@ let authorName = document.querySelector(".author");
 
 let localStorageData = localStorage.getItem("data");
 
+try {
+	if (
+		navigator.userAgentData.platform === "Android" ||
+		navigator.userAgentData.platform === ""
+	) {
+		throw new Error("Please try again or open in PC");
+	}
+} catch (error) {
+	const today = document.querySelector("#today")
+	today.style.display="none"
+}
+
+
+
+
+
+
+
+
 if (localStorageData === null) {
 	paragraph.textContent = `${"\u{201C}"}  ${"The best preparation for tomorrow is doing your best today."} ${"\u{201D}"}`;
 	authorName.textContent = "H. Jackson Brown Jr.";

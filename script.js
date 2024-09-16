@@ -2,6 +2,7 @@ let page = localStorage.setItem("pages", "1");
 let pa = localStorage.getItem("pages");
 let pages = Number(pa);
 const btn = document.querySelector("#quote-btn");
+let heading = document.querySelector("h1");
 
 btn.addEventListener("click", async (event) => {
 	event.preventDefault();
@@ -21,7 +22,7 @@ let arr = [
 	"Eagerness",
 ];
 
-let heading = document.querySelector("h1");
+
 
 const typeWrite = (arr) => {
 	heading.innerText = `Quotes is ${arr[index]}`;
@@ -36,6 +37,12 @@ async function numb(pages) {
 	const sec = document.querySelector(".sec");
 	pages = Number(localStorage.getItem("pages"));
 	try {
+		if (
+			navigator.userAgentData.platform === "Android" ||
+			navigator.userAgentData.platform === ""
+		) {
+			throw new Error("Please try again or open in PC");
+		}
 		let Data = await dataLive(pages);
 		for (let i = 0; i < Data.results.length; i++) {
 			let div = document.createElement("div");
@@ -56,10 +63,15 @@ async function numb(pages) {
 	} catch (error) {
 		let div = document.createElement("div");
 		let parg = document.createElement("p");
+		let parg1 = document.createElement("p")
+		btn.style.display="none"
 		div.setAttribute("class", "error");
 		parg.innerText = "404 Not Found";
+		parg.setAttribute("class","parg")
+		parg1.innerText = error.message;
+		parg1.setAttribute("class","parg1")
 		parg.style.color = "white";
-		div.appendChild(parg);
+		div.append(parg,parg1);
 		sec.appendChild(div);
 		callErr();
 	}
