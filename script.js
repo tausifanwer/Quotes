@@ -68,7 +68,7 @@ async function numb(pages) {
 		div.setAttribute("class", "error");
 		parg.innerText = "404 Not Found";
 		parg.setAttribute("class","parg")
-		parg1.innerText = error.message;
+		parg1.innerText = "Please try again or open in PC";
 		parg1.setAttribute("class","parg1")
 		parg.style.color = "white";
 		parg1.style.color = "white";
