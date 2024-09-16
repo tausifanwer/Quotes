@@ -33,7 +33,7 @@ function countDown() {
 }
 
 async function random() {
-	const response = await fetch("https://api.quotable.io/quotes/random");
+	const response = await fetch("https://api.realinspire.tech/v1/quotes/random");
 	const data = await response.json();
 	return data;
 }
@@ -53,7 +53,7 @@ setInterval(async () => {
 	hEle.textContent = hours <= 9 ? "0" + hours : hours;
 
 	// Check if it's the end of the day
-	if (seconds === 0 && minutes === 0 && hours === 15) {
+	if (seconds === 59 && minutes === 54 && hours === 2) {
 		// Fetch new data and update paragraph content
 		let data = await random();
 		localStorage.setItem(
