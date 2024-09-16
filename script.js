@@ -39,7 +39,7 @@ async function numb(pages) {
 	try {
 		if (
 			navigator.userAgentData.platform === "Android" ||
-			navigator.userAgentData.platform === ""
+			navigator.userAgentData.platform === ("" || undefined || null)
 		) {
 			throw new Error("Please try again or open in PC");
 		}
@@ -71,6 +71,7 @@ async function numb(pages) {
 		parg1.innerText = error.message;
 		parg1.setAttribute("class","parg1")
 		parg.style.color = "white";
+		parg1.style.color = "white";
 		div.append(parg,parg1);
 		sec.appendChild(div);
 		callErr();
