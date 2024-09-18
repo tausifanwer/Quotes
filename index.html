@@ -3,36 +3,38 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		
 
 		<title>Quotes</title>
 		<link rel="stylesheet" href="style.css" />
-		<link rel="shortcut icon" href="./public/quotes.png" type="image/x-icon">
+		<link rel="shortcut icon" href="./public/quotes.png" type="image/x-icon" />
 		<script src="./script.js " defer></script>
 		<script src="./today_random.js" defer></script>
+		<script src="./aiBtn.js" defer></script>
 	</head>
 	<body>
 		<h1></h1>
 		<button id="quote-btn" disabled>Get Quote</button>
 		<div id="today">
 			<div id="today-box">
-				<div id="text">Today’s new quotes </div>
+				<div id="text">Today’s new quotes</div>
 				<div id="time">
-					<span class="unit"  id="h"></span>
+					<span class="unit" id="h"></span>
 					<span class="dot" id="dot1"></span>
 					<span class="unit" id="m"></span>
 					<span class="dot" id="dot2"></span>
 					<span class="unit" id="s"></span>
-
 				</div>
 			</div>
 			<div id="today-quote">
-			<blockquote class="blockquote td"></blockquote>
-			<span class="author ">
-			</span>
+				<blockquote class="blockquote td"></blockquote>
+				<span class="author"> </span>
 			</div>
-		</div> 
+		</div>
+		<div id="quotes-show" class="popup">
+			<div class="close-icon close-popup">&times;</div>
+			<p id="paragraph"></p>
+		</div>
 		<section class="sec"></section>
-        <div id="loader" >Loading...</div>
+		<div id="loader">Loading...</div>
 	</body>
 </html>

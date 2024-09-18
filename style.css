@@ -2,7 +2,7 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	max-width: 660px;
+	max-width: 650px;
 	margin-inline: auto;
 	background-color: black;
 	margin-top: 10px;
@@ -22,18 +22,16 @@ h1 {
 	margin-bottom: 7px;
 	cursor: pointer;
 	font-size: large;
-    margin-bottom: 10px;
-    /* position: fixed;
+	margin-bottom: 10px;
+	/* position: fixed;
     display: block;
     right: 12rem; */
 }
 #quote-btn:hover {
 	/* padding: 7px; */
 	transition: 0.3s ease;
-    background-color: whitesmoke;
-    color: black;
-
-    
+	background-color: whitesmoke;
+	color: black;
 }
 
 #today {
@@ -125,18 +123,21 @@ h1 {
 	border-radius: 7px;
 	box-shadow: 0px 0px 5px;
 	font-size: larger;
-    cursor:pointer;
 }
-.box:hover  {
-    transition: 0.3s ease;
-    background-color: whitesmoke;
-    color: black;
+.box:hover {
+	transition: 0.3s ease;
+	background-color: whitesmoke;
+	color: black;
 }
 .box:hover .child {
-    transition: 0.3s ease;
-        background-color: whitesmoke;
-        color: black;
-        text-shadow: 0px 0px 1px ;
+	transition: 0.3s ease;
+	background-color: whitesmoke;
+	color: black;
+	text-shadow: 0px 0px 1px;
+}
+.box:hover .ai-btn {
+	border: 2px solid black;
+	cursor: pointer;
 }
 .blockquote {
 	margin-left: 0;
@@ -161,12 +162,38 @@ h1 {
 	text-align: center;
 	font-weight: 600;
 }
+.sbtn {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 0;
+	width: 100%;
+	padding: 10px;
+}
 .author {
 	margin-top: 9px;
 	font-size: medium;
 	margin-left: 40px;
 	padding: 8px;
+	width: 70%;
 }
+.ai-btn {
+	display: block;
+	color: white;
+	width: 20%;
+	height: 50px;
+	border: 2px solid whitesmoke;
+	border-radius: 30px;
+	padding: 2px;
+}
+/* .ai-btn:hover {
+	
+	transition: 0.3s ease;
+	background-color: whitesmoke;
+	color: black;
+	text-shadow: 0px 0px 1px;
+	border-color: black;
+} */
 #loader {
 	color: whitesmoke;
 	text-align: center;
@@ -178,7 +205,73 @@ h1 {
 	margin-top: 0;
 	font-size: large;
 }
-.parg1{
+.parg1 {
 	font-size: small;
 	text-align: center;
+}
+/* #quotes-show {
+	/* position: absolute;
+	background-color: aliceblue;
+	height: 60%;
+	width: 22%; 
+} */
+
+/* .show {
+ 	display: block;
+ 	width: 30%;
+ 	border: 1px solid black;
+ 	margin-left: 4px;
+ 	height: 70%;
+ 	text-align: justify
+ }
+
+ .hide {
+ 	display: none;
+ } */
+#paragraph {
+	/* color: whitesmoke; */
+	background-color: white;
+	color: black;
+	line-break: normal;
+	margin-top: 58px;
+	line-height: 24px;
+	padding: 6px;
+	background-color: black;
+	color: whitesmoke;
+	font-weight: 500;
+	font-size: medium;
+}
+
+.popup {
+	width: 500px;
+	height: 300px;
+	padding: 8px;
+	background-color: white;
+	border-radius: 16px;
+	position: fixed;
+	inset: 0;
+	margin: auto;
+	box-shadow: 0 5px 2px 0 rgba(0, 0, 0, 0.3);
+	transform: scale(0);
+	transition: transform 1s ease-in-out;
+	border: 1px solid white;
+	background-color: black;
+	
+}
+
+.open-pop {
+	transform: scale(1);
+	transition: transform 1s ease-in-out;
+}
+
+.close-icon {
+	font-size: 48px;
+	font-weight: 700;
+	position: absolute;
+	right: 16px;
+	cursor: pointer;
+	font-family: serif;
+	background-color: white;
+	background-color: black;
+	color: white;
 }

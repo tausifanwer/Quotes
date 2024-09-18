@@ -1,12 +1,17 @@
-let page = localStorage.setItem("pages", "1");
+// let page = localStorage.setItem("pages", "1");
 let pa = localStorage.getItem("pages");
 let pages = Number(pa);
 const btn = document.querySelector("#quote-btn");
 let heading = document.querySelector("h1");
+const quotesShow = document.querySelector("#quotes-show");
+const quotesView = document.querySelector("#paragraph");
+const openPopup = document.querySelector(".open-popup");
+const closePopup = document.querySelector(".close-popup");
+const popup = document.querySelector(".popup");
 
 btn.addEventListener("click", async (event) => {
 	event.preventDefault();
-	
+
 	const randomData = await fetch("https://api.quotable.io/quotes/random");
 	const data = await randomData.json();
 	console.log(data[0]);
@@ -21,8 +26,42 @@ let arr = [
 	"Aspiration",
 	"Eagerness",
 ];
+const vergoJI = "AIzaSyBzxYdZGGZb6e_f208xGaceQNjWny4leKc";
+async function getChat(prompt) {
+	try {
+		const response = await fetch(
+			`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${vergoJI}`,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				model: "gemini-1.5-flash",
+				generationConfig: {
+					candidateCount: 1,
+					// stopSequences: ["x"],
+					maxOutputTokens: 10,
+					temperature: 2.0,
+				},
+				body: JSON.stringify({
+					contents: {
+						role: "user",
+						parts: {
+							text: prompt,
+						},
+					},
+				}),
+			}
+		);
 
-
+		const data = await response.json();
+		// console.log(data);
+		return data.candidates[0].content.parts[0].text;
+	} catch (error) {
+		console.log(error);
+		throw new Error("SomeThing Went Wrong");
+	}
+}
 
 const typeWrite = (arr) => {
 	heading.innerText = `Quotes is ${arr[index]}`;
@@ -39,7 +78,7 @@ async function numb(pages) {
 	try {
 		if (
 			navigator.userAgentData.platform === "Android" ||
-			navigator.userAgentData.platform === ("")
+			navigator.userAgentData.platform === ""
 		) {
 			throw new Error("Please try again or open in PC");
 		}
@@ -48,35 +87,115 @@ async function numb(pages) {
 			let div = document.createElement("div");
 			let block = document.createElement("blockquote");
 			let span = document.createElement("span");
+			let aiBtn = document.createElement("button");
+			let sbtn = document.createElement("div");
 			div.setAttribute("class", "box");
 			span.setAttribute("class", "author child");
 			block.setAttribute("class", "blockquote child");
-			div.append(block, span);
+			aiBtn.setAttribute("class", "ai-btn child open-popup");
+			aiBtn.innerText = "AI";
+			sbtn.setAttribute("class", "sbtn child");
+			sbtn.append(span, aiBtn);
+			div.append(block, sbtn);
 			block.innerText = `${"\u{201C}"}  ${
 				Data.results[i].content
 			} ${"\u{201D}"}`;
 			span.innerText = Data.results[i].author;
 			sec.appendChild(div);
+			aiBtn.addEventListener("click", async (event) => {
+				event.stopPropagation();
+				const userValue = `summarize this quotes ${block.innerText}`;
+				let input = block.innerText;
+				let exFromLocalStorage =
+					JSON.parse(localStorage.getItem("userValueData")) || {};
+				let exFromLocalStorageLength =
+					Object.keys(exFromLocalStorage).length || 0;
+				try {
+					if (exFromLocalStorageLength && exFromLocalStorage) {
+						if (exFromLocalStorageLength <= 10 && input in exFromLocalStorage) {
+							popup.classList.add("open-pop");
+
+							console.log(exFromLocalStorage[input]);
+							quotesView.textContent = exFromLocalStorage[input];
+							quotesShow.append(quotesView);
+							inputBox.value = "";
+							// console.log("caches");
+						} else {
+							if (exFromLocalStorageLength < 10) {
+								let newKey = input;
+								let newValue = await getChat(userValue);
+								exFromLocalStorage = {
+									[newKey]: newValue,
+									...exFromLocalStorage,
+								};
+								// console.log(exFromLocalStorage);
+								localStorage.setItem(
+									"userValueData",
+									JSON.stringify(exFromLocalStorage)
+								);
+								popup.classList.add("open-pop");
+								quotesView.textContent = exFromLocalStorage[input];
+								quotesShow.append(quotesView);
+								// console.log("new key");
+							} else {
+								let lastKey = Object.keys(exFromLocalStorage).pop();
+								delete exFromLocalStorage[lastKey];
+								let newKey = input;
+								let newValue = await getChat(userValue);
+								exFromLocalStorage = {
+									[newKey]: newValue,
+									...exFromLocalStorage,
+								};
+								// console.log(exFromLocalStorage);
+								localStorage.setItem(
+									"userValueData",
+									JSON.stringify(exFromLocalStorage)
+								);
+								popup.classList.add("open-pop");
+								quotesView.textContent = exFromLocalStorage[input];
+								quotesShow.append(quotesView);
+								// console.log("out of range");
+							}
+						}
+					} else {
+						let data = await getChat(userValue);
+						localStorage.setItem(
+							"userValueData",
+							JSON.stringify({
+								[input]: data,
+							})
+						);
+						popup.classList.add("open-pop");
+
+						quotesView.textContent = data;
+						quotesShow.append(quotesView);
+						// console.log("first time");
+					}
+				} catch (error) {
+					console.log(error);
+				}
+			});
 		}
 		pages = pages + 1;
 		localStorage.setItem("pages", pages);
 	} catch (error) {
 		let div = document.createElement("div");
 		let parg = document.createElement("p");
-		let parg1 = document.createElement("p")
-		btn.style.display="none"
+		let parg1 = document.createElement("p");
+		btn.style.display = "none";
 		div.setAttribute("class", "error");
 		parg.innerText = "404 Not Found";
-		parg.setAttribute("class","parg")
+		parg.setAttribute("class", "parg");
 		parg1.innerText = "Please try again or open in PC";
-		parg1.setAttribute("class","parg1")
+		parg1.setAttribute("class", "parg1");
 		parg.style.color = "white";
 		parg1.style.color = "white";
-		div.append(parg,parg1);
+		div.append(parg, parg1);
 		sec.appendChild(div);
 		callErr();
 	}
 }
+
 var count;
 async function dataLive(page) {
 	let response;
@@ -107,18 +226,17 @@ const options = {
 	rootMargin: "0px",
 	threshold: 1,
 };
-var count
+var count;
 const callback = (entries) => {
 	const [entry] = entries;
 
 	count = Number(localStorage.getItem("pages")) || count++;
 	if (Number(localStorage.getItem("pages")) === 0) {
 		localStorage.setItem("pages", count);
-		}
+	}
 	if (entry.isIntersecting && Number(localStorage.getItem("pages")) > 1) {
 		loadMoreItems(pages);
 	}
-	
 };
 
 function callErr() {
@@ -131,3 +249,27 @@ const loading = document.querySelector("#loader");
 observe.observe(loading);
 
 numb(pages);
+
+closePopup.addEventListener("click", () => {
+	popup.classList.remove("open-pop");
+});
+// const option_1 = {
+// 	root: null,
+// 	threshold: 0.3,
+// };
+// const callback_1 = (entries, observe) => {
+// 	const [entry] = entries;
+// 	if (entry.isIntersecting) {
+// 		entry.target.style.opacity = 100;
+// 		console.log("in");
+// 		// observe.unobserve(ele1)
+// 	} else {
+// 		paragraph.textContent = "";
+// 		entry.target.setAttribute("class", "hide");
+// 		console.log("out");
+// 	}
+// };
+
+// const observe_1 = new IntersectionObserver(callback_1, option_1);
+
+// observe_1.observe(quotesShow);

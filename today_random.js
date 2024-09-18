@@ -1,5 +1,5 @@
-const time = document.querySelector("#time");
 let date = new Date();
+const time = document.querySelector("#time");
 let hEle = document.querySelector("#h");
 let mEle = document.querySelector("#m");
 let sEle = document.querySelector("#s");
@@ -18,16 +18,9 @@ try {
 		throw new Error("Please try again or open in PC");
 	}
 } catch (error) {
-	const today = document.querySelector("#today")
-	today.style.display="none"
+	const today = document.querySelector("#today");
+	today.style.display = "none";
 }
-
-
-
-
-
-
-
 
 if (localStorageData === null) {
 	paragraph.textContent = `${"\u{201C}"}  ${"The best preparation for tomorrow is doing your best today."} ${"\u{201D}"}`;
