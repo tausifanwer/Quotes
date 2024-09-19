@@ -116,7 +116,6 @@ async function numb(pages) {
 							popup.classList.add("open-pop");
 							quotesView.textContent = exFromLocalStorage[input];
 							quotesShow.append(quotesView);
-							inputBox.value = "";
 							// console.log("caches");
 						} else {
 							if (exFromLocalStorageLength < 10) {
