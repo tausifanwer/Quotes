@@ -114,8 +114,6 @@ async function numb(pages) {
 					if (exFromLocalStorageLength && exFromLocalStorage) {
 						if (exFromLocalStorageLength <= 10 && input in exFromLocalStorage) {
 							popup.classList.add("open-pop");
-
-							console.log(exFromLocalStorage[input]);
 							quotesView.textContent = exFromLocalStorage[input];
 							quotesShow.append(quotesView);
 							inputBox.value = "";
