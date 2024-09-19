@@ -1,4 +1,4 @@
-// let page = localStorage.setItem("pages", "1");
+let page = localStorage.setItem("pages", "1");
 let pa = localStorage.getItem("pages");
 let pages = Number(pa);
 const btn = document.querySelector("#quote-btn");
