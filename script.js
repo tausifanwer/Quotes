@@ -206,7 +206,7 @@ async function dataLive(page) {
 	try {
 		if (response.ok) {
 			const data = await response.json();
-
+			flag = true;
 			return data;
 		}
 	} catch (error) {
@@ -231,8 +231,11 @@ const callback = (entries) => {
 	if (Number(localStorage.getItem("pages")) === 0) {
 		localStorage.setItem("pages", count);
 	}
-	if (entry.isIntersecting && Number(localStorage.getItem("pages")) > 1) {
-		loadMoreItems(pages);
+	if (flag) {
+		if (entry.isIntersecting && Number(localStorage.getItem("pages")) > 1) {
+			loadMoreItems(pages);
+			flag = false;
+		}
 	}
 };
 
@@ -242,7 +245,7 @@ function callErr() {
 const observe = new IntersectionObserver(callback, options);
 
 const loading = document.querySelector("#loader");
-
+let flag = true;
 observe.observe(loading);
 
 numb(pages);
@@ -250,23 +253,3 @@ numb(pages);
 closePopup.addEventListener("click", () => {
 	popup.classList.remove("open-pop");
 });
-// const option_1 = {
-// 	root: null,
-// 	threshold: 0.3,
-// };
-// const callback_1 = (entries, observe) => {
-// 	const [entry] = entries;
-// 	if (entry.isIntersecting) {
-// 		entry.target.style.opacity = 100;
-// 		console.log("in");
-// 		// observe.unobserve(ele1)
-// 	} else {
-// 		paragraph.textContent = "";
-// 		entry.target.setAttribute("class", "hide");
-// 		console.log("out");
-// 	}
-// };
-
-// const observe_1 = new IntersectionObserver(callback_1, option_1);
-
-// observe_1.observe(quotesShow);
