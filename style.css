@@ -189,14 +189,10 @@ h1 {
 	border-radius: 30px;
 	padding: 2px;
 }
-/* .ai-btn:hover {
-	
-	transition: 0.3s ease;
-	background-color: whitesmoke;
-	color: black;
-	text-shadow: 0px 0px 1px;
-	border-color: black;
-} */
+.ai-btn:hover{
+	box-shadow: 3px 3px 7px black;
+}
+
 #loader {
 	color: whitesmoke;
 	text-align: center;
@@ -212,25 +208,6 @@ h1 {
 	font-size: small;
 	text-align: center;
 }
-/* #quotes-show {
-	/* position: absolute;
-	background-color: aliceblue;
-	height: 60%;
-	width: 22%; 
-} */
-
-/* .show {
- 	display: block;
- 	width: 30%;
- 	border: 1px solid black;
- 	margin-left: 4px;
- 	height: 70%;
- 	text-align: justify
- }
-
- .hide {
- 	display: none;
- } */
 #paragraph {
 	/* color: whitesmoke; */
 	background-color: white;
