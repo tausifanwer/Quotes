@@ -279,20 +279,16 @@ h1 {
 	color: white;
 }
 
-#top{
+svg {
 	position: fixed;
-	/* background-color: aliceblue; */
 	z-index: 999;
-	height: 8vh;
-	width: 6vw;
 	top: 73vh;
 	left: 86vw;
-	display: none;
-}
-#top svg {
-	background-color:  whitesmoke;
+
+	background-color: whitesmoke;
 	border-radius: 50%;
 	cursor: pointer;
-	border: 3px solid black;
+	border: 3px solid whitesmoke;
+	display: none;
 }
 

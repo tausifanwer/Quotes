@@ -255,7 +255,7 @@ closePopup.addEventListener("click", () => {
 	popup.classList.remove("open-pop");
 });
 
-const top1 = document.querySelector("#top");
+const top1 = document.querySelector("svg");
 const body = document.querySelector("body");
 window.addEventListener("scroll", () => {
 	let scrollPosition = window.scrollY;
