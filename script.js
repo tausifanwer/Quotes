@@ -93,6 +93,7 @@ async function numb(pages) {
 			span.setAttribute("class", "author child");
 			block.setAttribute("class", "blockquote child");
 			aiBtn.setAttribute("class", "ai-btn child open-popup");
+			aiBtn.setAttribute("title", "Summarize Quotes By A.I");
 			aiBtn.innerText = "AI";
 			sbtn.setAttribute("class", "sbtn child");
 			sbtn.append(span, aiBtn);
@@ -252,4 +253,24 @@ numb(pages);
 
 closePopup.addEventListener("click", () => {
 	popup.classList.remove("open-pop");
+});
+
+const top1 = document.querySelector("#top");
+const body = document.querySelector("body");
+window.addEventListener("scroll", () => {
+	let scrollPosition = window.scrollY;
+	if (scrollPosition > window.innerHeight) {
+		top1.style.display = "block";
+	} else {
+		top1.style.display = "none";
+	}
+});
+
+
+top1.addEventListener("click", (event) => {
+	event.stopPropagation();
+	window.scrollTo({
+		top: 0,
+		behavior: "smooth",
+	});
 });
