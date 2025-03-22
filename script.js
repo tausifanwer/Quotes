@@ -26,11 +26,11 @@ let arr = [
 	"Aspiration",
 	"Eagerness",
 ];
-const vergoJI = "AIzaSyBzxYdZGGZb6e_f208xGaceQNjWny4leKc";
+const vergoJI = "AIzaSyBxcfOCSHpkRKVetvk2iRQtMy8Km4BS0Bg";
 async function getChat(prompt) {
 	try {
 		const response = await fetch(
-			`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${vergoJI}`,
+			`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${vergoJI}`,
 			{
 				method: "POST",
 				headers: {
@@ -198,9 +198,7 @@ var count;
 async function dataLive(page) {
 	let response;
 	try {
-		response = await fetch(
-			`https://api.realinspire.tech/v1/quotes?page=${page}`
-		);
+		response = await fetch(`https://api.quotable.io/quotes?page=${page}`);
 	} catch (error) {
 		throw new Error("some thing happen");
 	}
@@ -265,7 +263,6 @@ window.addEventListener("scroll", () => {
 		top1.style.display = "none";
 	}
 });
-
 
 top1.addEventListener("click", (event) => {
 	event.stopPropagation();
